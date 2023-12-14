@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Website</title>
+</head>
+<body>
+    <form id="gradeForm">
+        <label for="studentName">Name of Student:</label>
+        <input type="text" id="studentName" required>
+        <label for="section">Section:</label>
+        <input type="text" id="section" required>
+        <label for="year_level">Year Level:</label>
+        <input type="number" id="year_level" min="1" step="1" max="4" required>
+        <ul>
+            <li>
+                <label>Input Grade for Course 1:</label>
+                <input type="number" id="grade1" min="0" step="1" max="100" required />
+            </li>
+            <li>
+                <label>Input Grade for Course 2:</label>
+                <input type="number" id="grade2" min="0" step="1" max="100" required />
+            </li>
+            <li>
+                <label>Input Grade for Course 3:</label>
+                <input type="number" id="grade3" min="0" step="1" max="100" required />
+            </li>
+            <li>
+                <label>Input Grade for Course 4:</label>
+                <input type="number" id="grade4" min="0" step="1" max="100" required />
+            </li>
+            <li>
+                <label>Input Grade for Course 5:</label>
+                <input type="number" id="grade5" min="0" step="1" max="100" required />
+            </li>
+        </ul>
+        <button type="button" id="btnSubmit">Show Result</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script type="text/javascript">
+        const btnSubmit = document.getElementById("btnSubmit");
+        const resultDiv = document.getElementById("result");
+
+        btnSubmit.addEventListener('click', calculateAvrg);
+
+        function calculateAvrg() {
+            const name = document.getElementById("studentName").value;
+            const section = document.getElementById("section").value;
+            const yearLevel = document.getElementById("year_level").value;
+
+            const grade1 = parseFloat(document.getElementById("grade1").value) || 0;
+            const grade2 = parseFloat(document.getElementById("grade2").value) || 0;
+            const grade3 = parseFloat(document.getElementById("grade3").value) || 0;
+            const grade4 = parseFloat(document.getElementById("grade4").value) || 0;
+            const grade5 = parseFloat(document.getElementById("grade5").value) || 0;
+
+            const totalGrade = grade1 + grade2 + grade3 + grade4 + grade5;
+            const average = totalGrade / 5;
+
+            let message = `Name: ${name}<br>Section: ${section}<br>Year Level: ${yearLevel}<br>Average Grade: ${average.toFixed(2)}<br>`;
+
+            if (average > 90) {
+                message += "WITH HONORS, CONGRATULATIONS!!! ";
+            } else if (average >= 75) {
+                message += "YOU PASSED, KEEP IT UP!";
+            } else {
+                message += "YOU FAILED, WORK HARDER NEXT TIME!";
+            }
+
+            resultDiv.innerHTML = message;
+        }
+    </script>
+</body>
+</html>
